@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+<h4>Employee Details[{{employees.length}}]</h4>
+
+<hr>
+
+{{persons()}}
+
+
+
+<div class="form-row">
+  <div class="col-auto">
+   
+    <select [(ngModel)]="DeptBy" >
+      <option value="" disabled selected>Department</option>
+
+      
+      <option *ngFor="let i of filterDepartments" [value]=i>{{i}}</option>
+    
+
+    </select>
+  </div>
+  <div class="col-3">
+    <input  [(ngModel)]="NameorEmail"  type="text" placeholder="Name/Email" id="uniqueID" >
+  </div>
+  <div class="col-2">
+    <button (click)="Search()">Search</button>
+  </div>
+  <div class="col">
+    <button (click)="persons()">Reset and Reload</button>
+  </div>
+  <div class="col-2">
+   
+    <select  [(ngModel)]="chosensort" (ngModelChange)="sort()">
+        <option  value="name[a-z]">name[a-z]</option>
+        <option value="name[z-a]">name[z-a]</option>
+        <option value="Age">Age</option>
+        <option value="Email">Email</option>
+      </select>
+  </div>
+</div>
+<table id="myTable">
+  <tr [ngStyle]="{'font-family': 'Courier New','font-weight': '900'}" >
+    <th>Employee Name</th>
+    <th>Age</th>
+    <th>Email address</th>
+    <th>Department</th>
+  </tr>
+  
+
+  <tr *ngFor="let i of EmployeeDetails" [ngStyle]="{'font-family': 'Garamond, serif'}" >
+    <td>{{i.name}}</td>
+    <td>{{i.age}}</td>
+    <td>{{i.email}}</td>
+   
+    <td class="container"  >{{i.departments.length}}<p class=overlay >{{i.departments}} </p> </td>
+       
+
+</tr>
+
+</table>
+
+</body>
+</html>

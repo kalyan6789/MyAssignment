@@ -1,0 +1,105 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+body, html {
+    height: 100%;
+    margin: 0 auto;
+}
+
+body {
+    font-family: 'Montserrat';
+    font-size: 18px;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+.noBorder {
+    border:none !important;
+}
+a {
+    text-decoration: none;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 0.3em;
+    display: grid;
+    grid-template-columns: 30% auto;
+}
+    a {
+        color: white;
+    }
+
+section {
+    width: 80%;
+    margin: 0 auto;
+    padding: 2em;
+}
+
+
+header {
+    background: #7700FF;
+}
+    .logo {
+        font-weight: bold;
+    }
+
+    nav {
+        justify-self: right;
+    }
+        ul {
+            list-style-type: none;
+            margin : 0;
+           padding: 0;
+        }
+            li {
+                float: left;
+            }
+                a {
+                    padding: 1.5em;
+                    text-transform: uppercase;
+                    font-size: .8em;
+                }
+                   
+      
+                table {
+                    margin-top: 2%;
+                  font-family: arial, sans-serif;
+                  border-collapse: collapse;
+                  border:1px solid black;
+                  width: 100%;
+                }
+                
+                td, th {
+                  border: 1px solid black;
+                  text-align: left;
+                  padding: 8px;
+                }
+                t{
+                border:solid black
+                }
+                
+                tr:nth-child(even) {
+                  background-color: #dddddd;
+                }
+                
+                .container{
+                min-width: 1px;
+                border: 0ch;
+                }
+                
+                .container:hover .overlay {
+                  opacity: 1;
+                
+                }
+                .overlay {
+                  position: absolute;
+                  opacity: 0;
+                  transition: .5s ease;
+                  background-color: rgb(241, 226, 226);
+                }
