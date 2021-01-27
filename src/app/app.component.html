@@ -5,25 +5,16 @@
 <body>
 
 <h4>Employee Details[{{employees.length}}]</h4>
-
 <hr>
-
-{{persons()}}
-
-
+{{UniqueAndReload()}}
 
 <div class="form-row">
-  <div class="col-auto">
-   
-    <select [(ngModel)]="DeptBy" >
-      <option value="" disabled selected>Department</option>
-
-      
-      <option *ngFor="let i of filterDepartments" [value]=i>{{i}}</option>
-    
-
-    </select>
-  </div>
+<div class="col-auto">
+<select [(ngModel)]="DeptBy" >
+  <option value="" disabled selected>Department</option>
+  <option *ngFor="let i of filterDepartments" [value]=i>{{i}}</option>
+</select>
+</div>
   <div class="col-3">
     <input  [(ngModel)]="NameorEmail"  type="text" placeholder="Name/Email" id="uniqueID" >
   </div>
@@ -31,11 +22,12 @@
     <button (click)="Search()">Search</button>
   </div>
   <div class="col">
-    <button (click)="persons()">Reset and Reload</button>
+    <button (click)="UniqueAndReload()">Reset and Reload</button>
   </div>
   <div class="col-2">
    
-    <select  [(ngModel)]="chosensort" (ngModelChange)="sort()">
+    <select  [(ngModel)]="sorting" (ngModelChange)="OnSort()">
+      <option value="" disabled selected>Sort By</option>
         <option  value="name[a-z]">name[a-z]</option>
         <option value="name[z-a]">name[z-a]</option>
         <option value="Age">Age</option>
@@ -47,8 +39,8 @@
   <tr [ngStyle]="{'font-family': 'Courier New','font-weight': '900'}" >
     <th>Employee Name</th>
     <th>Age</th>
-    <th>Email address</th>
-    <th>Department</th>
+    <th>Email Address</th>
+    <th>Departments</th>
   </tr>
   
 
@@ -56,8 +48,7 @@
     <td>{{i.name}}</td>
     <td>{{i.age}}</td>
     <td>{{i.email}}</td>
-   
-    <td class="container"  >{{i.departments.length}}<p class=overlay >{{i.departments}} </p> </td>
+    <td class="container">{{i.departments.length}}<p class=overlay >{{i.departments}} </p> </td>
        
 
 </tr>

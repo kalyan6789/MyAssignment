@@ -8,14 +8,16 @@
     styleUrls: ['./app.component.css']
   })
   export class AppComponent {
+
+
     employees  :Employees[];
-    
-  
+
     NameorEmail: string = "";
     DeptBy:string ="";
     title = 'MyAssignment';
     filterDepartments= [];  
-    sorting:string ="name[a-z]";
+    sorting:string ="";
+    EmployeeDetails: object = []; 
 
     constructor( )
     {
@@ -23,38 +25,38 @@
     this.employees  = [
       {
         name: "Badrinath",
-        age: 40,
+        age: 42,
         email: "Badrin@gmail.com",
         departments: ["Computer", "Physics"],
       },
       {
         name: "Swagat Swain",
-        age: 10,
+        age: 23,
         email: "Swagat897@gmail.com",
         departments: ["Computer"],
       },
     
       {
         name: "Manjunath Kumar",
-        age: 10,
+        age: 18,
         email: "Manjunathk789@gmail.com",
         departments: ["Physics", "Chemistry"],
       },
       {
         name: "Aravind",
-        age: 60,
+        age: 52,
         email: "Aravind@gmail.com",
         departments: ["Chemistry", "Physics"],
       },
       {
         name: "Praveen Patekar",
-        age: 70,
+        age: 34,
         email: "Praveenpatekar@gmail.com",
         departments: ["Computer", "Physics", "Chemistry"],
       },
       {
         name: "Naina Singh",
-        age: 70,
+        age: 76,
         email: "Nainasingh@gmail.com",
         departments: ["Computer", "Physics"],
       },
@@ -63,51 +65,40 @@
   }
 
 
-    EmployeeDetails: object = [];  
-    persons()
+
+//For Unique Departments and Reloading the data
+  UniqueAndReload()
     {
-      this.EmployeeDetails=this.employees
+     
+      this.EmployeeDetails= this.employees.sort((a,b) => a.name.localeCompare(b.name));
+       for (const i of this.employees ) 
+        this.filterDepartments.push(...i.departments)
+      this.filterDepartments = this.filterDepartments.filter((item, i, ar) => ar.indexOf(item) === i);
       if(!(this.filterDepartments.includes("All")))
-          {
-            this.filterDepartments.push("All")
-          }
-      for(var i of this.employees)
-      {
-        for(var j of i.departments)
-        {
-          if(!(this.filterDepartments.includes(j)))
-          {
-            this.filterDepartments.push(j)
-          }
-        }
-      }
+        this.filterDepartments.push("All")
+      
+    }
 
-      }
-   
 
+ //Searching with Department Name and NameOrEmail   
     Search(){
      
-   
-      if(!(this.NameorEmail
-        ))
+      if(!(this.NameorEmail))
+       {
+       if(this.DeptBy!="All")
       {
-        if(this.DeptBy=="All")
-        return this.EmployeeDetails
-      else
-      {
-        let obj=[];
-      for(var i of this.employees)
-      {
-        for(var j of i.departments)
+        let obj=[]; 
+        this.employees.filter((item)=>
         {
-          if(this.DeptBy==j)
-          {
-            obj.push(i)   
+          for (const i of item.departments) {
+            if(this.DeptBy===i)
+                obj.push(item) 
           }
-        }
-        }
+        })
+        obj=obj.sort((a,b) => a.name.localeCompare(b.name));
       this.EmployeeDetails=obj;
-      return this.EmployeeDetails}
+     }
+     return this.EmployeeDetails
       }
       
 
@@ -117,38 +108,37 @@
         if(this.DeptBy=="All")
       {
       this.employees.forEach(i => {
-        if( this.NameorEmail==i.name)
+        if( this.NameorEmail.toLowerCase()===i.name.toLowerCase())
         {
           obj.push(i)   
         }
       });
-          
+      obj=obj.sort((a,b) => a.name.localeCompare(b.name));
+
         this.EmployeeDetails=obj
-        return this.EmployeeDetails
         }
-      
-      
+    
       else
       {
         let obj=[];
-      for(var i of this.employees)
-      {
-        for(var j of i.departments)
+        this.employees.filter((item)=>
         {
-          if(this.DeptBy==j && this.NameorEmail==i.name)
-        {
-          obj.push(i)   
-        }
-        }
-      }
+          for (const i of item.departments) {
+            if(this.DeptBy===i && this.NameorEmail.toLowerCase()===item.name.toLowerCase())
+                obj.push(item)
+             
+          }
+        })
+        obj=obj.sort((a,b) => a.name.localeCompare(b.name));
+
     this.EmployeeDetails=obj;
-    return this.EmployeeDetails}
+    }
       }
+      return this.EmployeeDetails
       }
-
-
-
-  sort()
+      
+//Sorting Method
+   OnSort()
       {
         switch(this.sorting)
         {
@@ -186,6 +176,5 @@
             }
         }
       }
-      
-  }
-
+ 
+}
